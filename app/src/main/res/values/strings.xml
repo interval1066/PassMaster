@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PassMaster</string>
+    <string name="action_settings">Settings</string>
+    <string name="lblPassword">Enter Your Password :</string>
+    <string name="btn_submit">Submit</string>
+    <string name="title_sites_list">Configured Sites</string>
+    <string name="pw_warning">You must create a master pass word before using PassMaster.</string>
+</resources>
