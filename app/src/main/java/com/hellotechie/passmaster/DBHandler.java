@@ -42,7 +42,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_SITES_TABLE = "CREATE TABLE IF NOT EXISTS" + TABLE_SITES + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TYPE + " INTEGER,"
-                + KEY_SITE + " TEXT," + KEY_USER + " TEXT, " + KEY_PW + " TEXT,"
+                + KEY_SITE + " TEXT NOT NULL," + KEY_USER + " TEXT, " + KEY_PW + " TEXT,"
                 + KEY_DESC + " TEXT" + ")";
         db.execSQL(CREATE_SITES_TABLE);
     }

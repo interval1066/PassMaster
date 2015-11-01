@@ -8,29 +8,33 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.content.Context;
-import java.util.Properties;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.preference.PreferenceManager;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-//import android.widget.Toast;
-//import com.hellotechie.passmaster.DisplaySitesListActivity;
 
 public class MainActivity extends Activity {
 
     private EditText password;
     private Context context;
-    private Properties properties;
     private AlertDialog alertDialog;
+    private ConfigView confDlg;
+    private SharedPreferences sharedPreferences;
+    private DisplaySitesListActivity sites;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context=this;
-        PropertyReader propertyReader;
         setContentView(R.layout.content_main);
-        propertyReader = new PropertyReader(context);
-        properties = propertyReader.getMyProperties("app.properties");
-        addListenerOnButton();
 
+        sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
+        confDlg = new ConfigView(this);
+        //sites = new DisplaySitesListActivity();
+        addListenerOnButton();
     }
 
     public void addListenerOnButton() {
@@ -43,7 +47,8 @@ public class MainActivity extends Activity {
                             public void onClick(DialogInterface dialog, int id) {
                                 // if this button is clicked, close
                                 // current activity
-                                MainActivity.this.finish();
+                                //MainActivity.this.finish();
+                                confDlg.show();
                             }
                         });
         alertDialog = alertDialogBuilder.create();
@@ -55,16 +60,17 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), DisplaySitesListActivity.class);
-                //if(password.getText().toString() == "")
-                    alertDialog.show();
+                String pw = sharedPreferences.getString("masterpw", "");
 
-                /*if(password.getText().toString() == properties.getProperty("master_pw"))
+                if(pw.length() == 0)
+                    alertDialog.show();
+                else if(Crypt.crypt("zyxwpq", password.getText().toString()).compareTo(pw) == 0)
                     startActivity(intent);
                 else {
                     finish();
                     android.os.Process.killProcess(android.os.Process.myPid());
                     System.exit(0);
-                }*/
+                }
             }
         });
     }

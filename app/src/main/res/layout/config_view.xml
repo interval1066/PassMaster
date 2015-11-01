@@ -5,23 +5,21 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/lblPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newsite"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/txtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword" >
+        android:text="@string/master" />
+
+    <EditText
+        android:id="@+id/masterinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text" >
         <requestFocus />
     </EditText>
 
     <Button
-        android:id="@+id/btnSubmit"
+        android:id="@+id/pwSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_submit" />
+        android:text="@string/setpw" />
 </LinearLayout>

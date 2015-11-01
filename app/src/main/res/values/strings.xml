@@ -5,4 +5,28 @@
     <string name="btn_submit">Submit</string>
     <string name="title_sites_list">Configured Sites</string>
     <string name="pw_warning">You must create a master pass word before using PassMaster.</string>
+    <string name="master">Master Password</string>
+    <string name="setpw">Set Master Password</string>
+    <string name="newsite">Add New Site</string>
+    <string-array name="sports_array">
+        <item>Shuttle Badminton</item>
+        <item>Tennis</item>
+        <item>FootBall</item>
+        <item>Basket Ball</item>
+        <item>Table Tennis</item>
+        <item>Chess</item>
+        <item>Hockey</item>
+        <item>Chess</item>
+        <item>Sex</item>
+        <item>Vagina</item>
+        <item>Breasts</item>
+        <item>Fucking</item>
+        <item>Anal Sex</item>
+        <item>Pussy Licking</item>
+        <item>Sex All The Time</item>
+        <item>Badminton</item>
+        <item>Giving Head</item>
+        <item>Tounging Clit</item>
+        <item>Asshole Licking</item>
+    </string-array>
 </resources>
