@@ -16,31 +16,13 @@ public class Site {
     {
     }
 
-    public Site(int id,int type,String name,String url,String user,String pw,String desc)
-    {
-        this.id=id;
-        this.name=name;
-        this.url=url;
-        this.user=user;
-        this.pw=pw;
-        this.desc=desc;
-    }
-
-    public Site(int type,String name,String url,String user,String pw,String desc)
+    public Site(String name, String url, String user, String pw, String desc)
     {
         this.name=name;
         this.url=url;
         this.user=user;
         this.pw=pw;
         this.desc=desc;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 
     public void setName(String name) {
@@ -59,19 +41,9 @@ public class Site {
         this.pw = pw;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
+    public void setDesc(String desc) { this.desc = desc; }
 
-    public int getId() {
-
-        return id;
-    }
-
-    public int getType() {
-
-        return type;
-    }
+    public int getType() { return type; }
 
     public String getName() {
         return name;

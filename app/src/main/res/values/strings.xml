@@ -8,6 +8,13 @@
     <string name="master">Master Password</string>
     <string name="setpw">Set Master Password</string>
     <string name="newsite">Add New Site</string>
+    <string name="sitelabel">Site Label</string>
+    <string name="ref">Url/Address</string>
+    <string name="un">User Name</string>
+    <string name="pw">Password</string>
+    <string name="desc">Description</string>
+    <string name="gen">Generate Password</string>
+    <string name="enter">Add Site</string>
     <string-array name="sports_array">
         <item>Shuttle Badminton</item>
         <item>Tennis</item>
@@ -29,4 +36,12 @@
         <item>Tounging Clit</item>
         <item>Asshole Licking</item>
     </string-array>
+   <string-array name="site_types_array">
+       <item>Web Site</item>
+       <item>Personal Device</item>
+       <item>Encrypted DSD</item>
+       <item>Bank Account</item>
+       <item>Savings Account</item>
+       <item>Other</item>
+   </string-array>
 </resources>

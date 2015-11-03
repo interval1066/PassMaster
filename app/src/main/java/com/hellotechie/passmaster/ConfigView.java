@@ -27,8 +27,6 @@ public class ConfigView extends Dialog implements OnClickListener {
         okButton = (Button) findViewById(R.id.pwSubmit);
         okButton.setOnClickListener(this);
         loadSavedPreferences();
-        //if(pw != null)
-        //pwField.setText(pw);
     }
 
     private void loadSavedPreferences() {
