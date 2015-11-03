@@ -80,9 +80,9 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Site site = new Site(Integer.parseInt(cursor.getString(0)),
+        Site site = new Site(cursor.getString(0),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                cursor.getString(4), cursor.getString(5));
+                cursor.getString(4));
         // return site
         return site;
     }
@@ -100,8 +100,6 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Site site = new Site();
-                site.setId(Integer.parseInt(cursor.getString(0)));
-                site.setType(Integer.parseInt(cursor.getString(1)));
                 site.setName(cursor.getString(2));
                 site.setURL(cursor.getString(3));
                 site.setUser(cursor.getString(4));
@@ -136,17 +134,18 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_USER, site.getUser());
         values.put(KEY_PW, site.getPW());
         values.put(KEY_DESC, site.getDesc());
+        values.put(KEY_TYPE, site.getType());
 
         // updating row
         return db.update(TABLE_SITES, values, KEY_ID + " = ?",
-                new String[]{String.valueOf(site.getId())});
+                new String[]{String.valueOf(site.getName())});
     }
 
     // Deleting a site
     public void deleteSite(Site site) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_SITES, KEY_ID + " = ?",
-                new String[] { String.valueOf(site.getId()) });
+                new String[] { String.valueOf(site.getName()) });
         db.close();
     }
 }

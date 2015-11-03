@@ -47,8 +47,8 @@ public class EnterNewSiteActivity extends Activity implements OnClickListener {
             String pw = buf.getText().toString();
             buf = (TextView) findViewById(R.id.widget8);
             String desc = buf.getText().toString();
-
             Site site = new Site(nm, addr, pw, desc, typ);
+            db.addSite(site);
         }
     }
 }
