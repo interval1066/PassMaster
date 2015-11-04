@@ -27,6 +27,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hellotechie.passmaster.MainActivity" />
         </activity>
+        <activity
+            android:name=".EnterNewSiteActivity"
+            android:label="@string/newsite"
+            android:parentActivityName=".DisplaySitesListActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.hellotechie.passmaster.DisplaySitesListActivity" />
+        </activity>
+
     </application>
 
 </manifest>

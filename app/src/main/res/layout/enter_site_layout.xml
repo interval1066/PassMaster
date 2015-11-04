@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
-             android:layout_height="match_parent">
+             android:layout_height="match_parent"
+             android:background="?android:attr/selectableItemBackground"
+             android:baselineAligned="true"
+    >
 
     <TextView   android:id="@+id/widget2"
                 android:layout_width="wrap_content"
@@ -18,8 +21,8 @@
     <TextView   android:id="@+id/widget4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:text="@string/ref" />
+                android:text="@string/ref"
+                android:layout_margin="3dp"/>
 
     <EditText   android:id="@+id/widget5"
                 android:inputType="text"
@@ -63,27 +66,43 @@
                 android:layout_height="wrap_content"
                 android:padding="3dp" />
 
+    <Spinner   android:id="@+id/widget13"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:padding="3dp"
+               android:entries="@array/site_types_array"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button"
+            android:layout_column="0"
+            android:visibility="invisible"/>
+    </TableRow>
+
     <TableRow   android:id="@+id/widget12"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-        <ListView   android:id="@+id/widget13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:entries="@array/site_types_array"/>
-
         <Button     android:id="@+id/widget14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:text="@string/gen" />
+                    android:text="@string/gen"
+                    android:typeface="monospace"
+            />
 
         <Button     android:id="@+id/widget15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="3dp"
-                    android:text="@string/enter" />
+                    android:text="@string/enter"
+            />
     </TableRow>
 </TableLayout>

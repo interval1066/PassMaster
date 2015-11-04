@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml:2:1-32:12
+ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml:2:1-42:12
 	package
 		ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml:3:5-41
 		INJECTED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml
@@ -14,7 +14,7 @@ ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidMani
 		INJECTED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml
 		INJECTED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml
 application
-ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml:5:5-30:19
+ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml:5:5-40:19
 MERGED from [com.android.support:appcompat-v7:23.1.0] /home/bwana/AndroidStudioProjects/PassMaster/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.1.0] /home/bwana/AndroidStudioProjects/PassMaster/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:23.1.0] /home/bwana/AndroidStudioProjects/PassMaster/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/AndroidManifest.xml:22:5-20
@@ -66,6 +66,16 @@ ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidMani
 		ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml:28:17-72
 	android:name
 		ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml:27:17-63
+activity#com.hellotechie.passmaster.EnterNewSiteActivity
+ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml:30:9-38:20
+	android:label
+		ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml:32:13-44
+	android:parentActivityName
+		ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml:33:13-67
+	android:theme
+		ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml:34:13-56
+	android:name
+		ADDED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml:31:13-49
 uses-sdk
 INJECTED from /home/bwana/AndroidStudioProjects/PassMaster/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:23.1.0] /home/bwana/AndroidStudioProjects/PassMaster/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:20:5-43
