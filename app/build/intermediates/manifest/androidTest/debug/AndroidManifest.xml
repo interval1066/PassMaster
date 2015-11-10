@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hellotechie.passmaster.test">
+    package="com.hellotechie.PassMaster.test">
 
-    <uses-sdk android:minSdkVersion="12" android:targetSdkVersion="23" />
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17" />
 
     <application>
         <uses-library android:name="android.test.runner" />
     </application>
 
     <instrumentation android:name="android.test.InstrumentationTestRunner"
-                     android:targetPackage="com.hellotechie.passmaster"
+                     android:targetPackage="com.hellotechie.PassMaster"
                      android:handleProfiling="false"
                      android:functionalTest="false"
-                     android:label="Tests for com.hellotechie.passmaster"/>
+                     android:label="Tests for com.hellotechie.PassMaster"/>
 </manifest>
