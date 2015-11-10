@@ -50,7 +50,8 @@ public class Main_Screen extends Activity {
                             DetailsActivity.class);
                     details.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                             Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(details);
+                    details.putExtra("Site", item);
+                    startActivityForResult(details, 0);
                     finish();
                 }
             });
@@ -134,7 +135,7 @@ public class Main_Screen extends Activity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 		    View row = convertView;
-		    SiteHolder holder = null;
+		    SiteHolder holder;
 
 		    if (row == null) {
 				LayoutInflater inflater = LayoutInflater.from(activity);

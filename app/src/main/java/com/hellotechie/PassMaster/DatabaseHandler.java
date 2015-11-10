@@ -84,6 +84,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return site;
     }
 
+    Site Get_Site_By_Name(String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_SITES, new String[] { KEY_ID,
+                        KEY_NAME, KEY_URL, KEY_PW, KEY_DESC, KEY_TYPE }, KEY_NAME + "=?",
+                new String[] { name }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+        Site site = new Site(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                cursor.getString(4), cursor.getString(5));
+        // return contact
+        cursor.close();
+        db.close();
+
+        return site;
+    }
+
     public ArrayList<Site> Get_Sites() {
 		try {
 		    site_list.clear();
