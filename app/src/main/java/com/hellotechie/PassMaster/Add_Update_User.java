@@ -25,8 +25,8 @@ public class Add_Update_User extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	// TODO Auto-generated method stub
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.add_update_screen);
+	    super.onCreate(savedInstanceState);
+	    setContentView(R.layout.add_update_screen);
 
 	// set screen
 	Set_Add_Update_Screen();
@@ -126,7 +126,7 @@ public class Add_Update_User extends Activity {
 	    }
 	});*/
 
-	add_save_btn.setOnClickListener(new View.OnClickListener() {
+	    add_save_btn.setOnClickListener(new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {

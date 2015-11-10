@@ -12,11 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class Main_Screen extends Activity {
     Button add_btn;
@@ -33,8 +36,24 @@ public class Main_Screen extends Activity {
 		try {
 	    	Site_listview = (ListView) findViewById(R.id.list);
 	    	Site_listview.setItemsCanFocus(false);
-	    	add_btn = (Button) findViewById(R.id.add_btn);
-
+            add_btn = (Button) findViewById(R.id.add_btn);
+            ArrayAdapter<Site> adapter = new ArrayAdapter<Site>(this,
+                    android.R.layout.activity_list_item, site_data);
+            Site_listview.setAdapter(adapter);
+            Site_listview.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> Site_listview, View view, int position, long id) {
+                    LinearLayout ll = (LinearLayout) view;
+                    TextView tv = (TextView) ll.findViewById(R.id.user_name_txt);
+                    String item = tv.getText().toString();
+                    Intent details = new Intent(Main_Screen.this,
+                            DetailsActivity.class);
+                    details.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                            Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(details);
+                    finish();
+                }
+            });
 	    	Set_Referash_Data();
 		}
 		catch (Exception e) {
@@ -161,10 +180,6 @@ public class Main_Screen extends Activity {
 
 		@Override
 		public void onClick(final View v) {
-		    // TODO Auto-generated method stub
-
-		    // show a message while loader is loading
-
 		    AlertDialog.Builder adb = new AlertDialog.Builder(activity);
 		    adb.setTitle("Delete?");
 		    adb.setMessage("Are you sure you want to delete ");
@@ -188,16 +203,14 @@ public class Main_Screen extends Activity {
 	    return row;
 	}
 
-	class SiteHolder {
-	    TextView name;
-	    TextView url;
-	    TextView pw;
-		TextView desc;
-		TextView type;
-	    Button edit;
-	    Button delete;
-	}
-
+	    class SiteHolder {
+	        TextView name;
+	        TextView url;
+	        TextView pw;
+		    TextView desc;
+		    TextView type;
+	        Button edit;
+	        Button delete;
+	    }
     }
-
 }

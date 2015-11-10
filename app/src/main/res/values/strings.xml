@@ -10,4 +10,5 @@
         <item>Savings Account</item>
         <item>Other</item>
     </string-array>
+    <string name="title_activity_details">DetailsActivity</string>
 </resources>
