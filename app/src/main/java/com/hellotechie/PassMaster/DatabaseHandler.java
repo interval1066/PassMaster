@@ -7,7 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+//import android.util.Log;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
@@ -36,7 +36,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
 		+ KEY_URL + " TEXT," + KEY_USER + " TEXT," + KEY_PW + " TEXT,"
             + KEY_DESC + " TEXT," + KEY_TYPE + " TEXT)";
-        Log.d("create tablequery----> ", CREATE_CONTACTS_TABLE);
 	    db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -56,7 +55,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_URL, site.getUrl());
         values.put(KEY_USER, site.getUser());
 		values.put(KEY_PW, site.getPw());
-        Log.d("insert---------> ", site.getPw());
         values.put(KEY_DESC, site.getDesc());
 		values.put(KEY_TYPE, site.getType());
 		long res = db.insert(TABLE_SITES, null, values);
@@ -126,7 +124,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		}
 		catch (Exception e) {
 	    	// TODO: handle exception
-	    	Log.e("all_contact", "" + e);
 		}
 		return site_list;
     }

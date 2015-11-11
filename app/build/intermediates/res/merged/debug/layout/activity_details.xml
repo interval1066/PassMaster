@@ -75,7 +75,7 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:background="#000000"
-            android:text="Back"
+            android:text="Back To List"
             android:textColor="#FFFFFF" />
 
         </LinearLayout>

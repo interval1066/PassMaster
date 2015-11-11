@@ -7,7 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -59,7 +59,6 @@ public class Main_Screen extends Activity {
 		}
 		catch (Exception e) {
 	    	// TODO: handle exception
-	    	Log.e("some error", "" + e);
 		}
 		add_btn.setOnClickListener(new View.OnClickListener() {
 
@@ -81,7 +80,6 @@ public class Main_Screen extends Activity {
 		site_data.clear();
 		db = new DatabaseHandler(this);
 		ArrayList<Site> site_array_from_db = db.Get_Sites();
-        Log.d("Set_Refresh_Data", "In set_refresh_data");
 		for (int i = 0; i < site_array_from_db.size(); i++) {
 		    int tidno = site_array_from_db.get(i).getID();
 		    String name = site_array_from_db.get(i).getName();
@@ -99,7 +97,6 @@ public class Main_Screen extends Activity {
 			site.setDesc(desc);
             site.setType(type);
 		    site_data.add(site);
-            Log.d("Set_Refresh_Data", "Leaving set_refresh_data");
         }
 		db.close();
 		cAdapter = new Site_Adapter(Main_Screen.this, R.layout.listview_row,
@@ -169,7 +166,6 @@ public class Main_Screen extends Activity {
 		@Override
 		public void onClick(View v) {
 		    // TODO Auto-generated method stub
-		    Log.i("Edit Button Clicked", "**********");
 
 		    Intent update_user = new Intent(activity,
 			    Add_Update_User.class);

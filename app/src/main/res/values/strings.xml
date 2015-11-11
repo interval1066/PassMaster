@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Site List</string>
+    <string name="app_name">PassMaster</string>
     <string name="action_settings">Settings</string>
     <string-array name="site_types_array">
         <item>Web Site</item>
@@ -10,5 +10,5 @@
         <item>Savings Account</item>
         <item>Other</item>
     </string-array>
-    <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_details">Site Details</string>
 </resources>
