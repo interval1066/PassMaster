@@ -6,6 +6,7 @@ public class Site {
     public int _id;
     public String _name;
     public String _url;
+    public String _user;
     public String _pw;
     public String _desc;
     public String _type;
@@ -13,19 +14,21 @@ public class Site {
     public Site() {
     }
 
-    public Site(int id, String name, String url, String pw, String desc, String type) {
+    public Site(int id, String name, String url, String user, String pw, String desc, String type) {
 	    this._id = id;
     	this._name = name;
 	    this._url = url;
+        this._user = user;
     	this._pw = pw;
         this._desc = desc;
         this._type = type;
     }
 
     // constructor
-    public Site(String name, String url, String pw, String desc, String type) {
+    public Site(String name, String url, String user, String pw, String desc, String type) {
 	    this._name = name;
 	    this._url = url;
+        this._user = user;
 	    this._pw = pw;
         this._desc = desc;
         this._type = type;
@@ -59,6 +62,15 @@ public class Site {
     // setting phone number
     public void setUrl(String url) {
 	this._url = url;
+    }
+
+    public String getUser() {
+        return this._user;
+    }
+
+    // setting email
+    public void setUser(String user) {
+        this._user = user;
     }
 
     // getting email

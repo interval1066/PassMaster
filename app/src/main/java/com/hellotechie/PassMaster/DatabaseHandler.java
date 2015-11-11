@@ -10,23 +10,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
-
-    // All Static variables
-    // Database Version
     private static final int DATABASE_VERSION = 1;
-
-    // Database Name
     private static final String DATABASE_NAME = "pwmanager";
-
-    // Contacts table name
     private static final String TABLE_SITES = "sites";
 
     // Contacts Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
 	private static final String KEY_URL = "url";
+    private static final String KEY_USER = "user";
     private static final String KEY_PW = "pw";
-    private static final String KEY_DESC = "email";
+    private static final String KEY_DESC = "desc";
 	private static final String KEY_TYPE = "type";
     private final ArrayList<Site> site_list = new ArrayList<Site>();
 
@@ -37,10 +31,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-	String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_SITES + "("
-		+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT NOT NULL,"
-		+ KEY_URL + " TEXT," + KEY_PW + " TEXT," + KEY_DESC + " TEXT," + KEY_TYPE + " TEXT)";
-	db.execSQL(CREATE_CONTACTS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SITES);
+	    String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_SITES + "("
+		+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+		+ KEY_URL + " TEXT," + KEY_USER + " TEXT," + KEY_PW + " TEXT,"
+            + KEY_DESC + " TEXT," + KEY_TYPE + " TEXT)";
+        Log.d("create tablequery----> ", CREATE_CONTACTS_TABLE);
+	    db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
     // Upgrading database
@@ -57,8 +54,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		values.put(KEY_NAME, site.getName());
 		values.put(KEY_URL, site.getUrl());
+        values.put(KEY_USER, site.getUser());
 		values.put(KEY_PW, site.getPw());
-		values.put(KEY_DESC, site.getDesc());
+        Log.d("insert---------> ", site.getPw());
+        values.put(KEY_DESC, site.getDesc());
 		values.put(KEY_TYPE, site.getType());
 		long res = db.insert(TABLE_SITES, null, values);
 		db.close();
@@ -69,14 +68,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 
 		Cursor cursor = db.query(TABLE_SITES, new String[] { KEY_ID,
-			KEY_NAME, KEY_URL, KEY_PW, KEY_DESC, KEY_TYPE }, KEY_ID + "=?",
+			KEY_NAME, KEY_URL, KEY_USER, KEY_PW, KEY_DESC, KEY_TYPE }, KEY_ID + "=?",
 			new String[] { String.valueOf(id) }, null, null, null, null);
 		if (cursor != null)
 		    cursor.moveToFirst();
 
 		Site site = new Site(Integer.parseInt(cursor.getString(0)),
 			cursor.getString(1), cursor.getString(2), cursor.getString(3),
-			cursor.getString(4), cursor.getString(5));
+			cursor.getString(4), cursor.getString(5), cursor.getString(6));
 		// return contact
 		cursor.close();
 		db.close();
@@ -87,13 +86,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     Site Get_Site_By_Name(String name) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_SITES, new String[] { KEY_ID,
-                        KEY_NAME, KEY_URL, KEY_PW, KEY_DESC, KEY_TYPE }, KEY_NAME + "=?",
+                        KEY_NAME, KEY_URL, KEY_USER, KEY_PW, KEY_DESC, KEY_TYPE }, KEY_NAME + "=?",
                 new String[] { name }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
         Site site = new Site(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                cursor.getString(4), cursor.getString(5));
+                cursor.getString(4), cursor.getString(5),cursor.getString(6));
         // return contact
         cursor.close();
         db.close();
@@ -112,11 +111,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				do {
 				    Site site = new Site();
 			    	site.setID(Integer.parseInt(cursor.getString(0)));
-				    site.setName(cursor.getString(1));
-				    site.setUrl(cursor.getString(2));
-				    site.setPw(cursor.getString(3));
-					site.setDesc(cursor.getString(4));
-					site.setType(cursor.getString(5));
+                    site.setName(cursor.getString(1));
+                    site.setUrl(cursor.getString(2));
+                    site.setUser(cursor.getString(3));
+                    site.setPw(cursor.getString(4));
+					site.setDesc(cursor.getString(5));
+					site.setType(cursor.getString(6));
 			    	site_list.add(site);
 				} while (cursor.moveToNext());
 	    	}
@@ -137,6 +137,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		values.put(KEY_NAME, site.getName());
 		values.put(KEY_URL, site.getUrl());
+        values.put(KEY_USER, site.getUser());
 		values.put(KEY_PW, site.getPw());
 		values.put(KEY_DESC, site.getDesc());
 		values.put(KEY_TYPE, site.getType());

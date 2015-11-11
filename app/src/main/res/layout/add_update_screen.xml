@@ -19,9 +19,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Name"
-        android:inputType="textPersonName" >
-        <requestFocus />
-    </EditText>
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/add_url"
@@ -31,7 +29,17 @@
         android:ems="10"
         android:inputType="text"
         android:hint="http://"
-        android:maxLength="12" />
+        android:maxLength="128" />
+
+    <EditText
+        android:id="@+id/add_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Username"
+        android:maxLength="32" />
 
     <EditText
         android:id="@+id/add_pw"
@@ -40,7 +48,8 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="password"
-        android:inputType="text" />
+        android:inputType="text"
+        android:maxLength="32" />
 
     <EditText
         android:id="@+id/add_desc"
@@ -49,7 +58,8 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Description"
-        android:inputType="text" />
+        android:inputType="text"
+        android:maxLength="128" />
 
     <EditText
         android:id="@+id/add_type"
@@ -58,7 +68,8 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Web Site"
-        android:inputType="text" />
+        android:inputType="text"
+        android:maxLength="24" />
 
     <Spinner
         android:id="@+id/widget13"

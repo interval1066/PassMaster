@@ -86,6 +86,7 @@ public class Main_Screen extends Activity {
 		    int tidno = site_array_from_db.get(i).getID();
 		    String name = site_array_from_db.get(i).getName();
 		    String url = site_array_from_db.get(i).getUrl();
+            String user = site_array_from_db.get(i).getUser();
 		    String pw = site_array_from_db.get(i).getPw();
             String desc = site_array_from_db.get(i).getDesc();
 			String type = site_array_from_db.get(i).getType();
@@ -93,6 +94,7 @@ public class Main_Screen extends Activity {
 		    site.setID(tidno);
 	    	site.setName(name);
 		    site.setUrl(url);
+            site.setUser(user);
 		    site.setPw(pw);
 			site.setDesc(desc);
             site.setType(type);
@@ -207,6 +209,7 @@ public class Main_Screen extends Activity {
 	    class SiteHolder {
 	        TextView name;
 	        TextView url;
+            TextView user;
 	        TextView pw;
 		    TextView desc;
 		    TextView type;
