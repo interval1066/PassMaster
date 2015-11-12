@@ -78,10 +78,11 @@ public final class R {
         public static final int activity_details=0x7f040000;
         public static final int activity_main=0x7f040001;
         public static final int add_update_screen=0x7f040002;
-        public static final int config_pw=0x7f040003;
-        public static final int listview_row=0x7f040004;
-        public static final int login_main=0x7f040005;
-        public static final int main=0x7f040006;
+        public static final int app_bar=0x7f040003;
+        public static final int config_pw=0x7f040004;
+        public static final int listview_row=0x7f040005;
+        public static final int login_main=0x7f040006;
+        public static final int main=0x7f040007;
     }
     public static final class menu {
         public static final int main=0x7f090000;
