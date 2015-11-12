@@ -9,68 +9,83 @@ package com.hellotechie.PassMaster;
 
 public final class R {
     public static final class array {
-        public static final int site_types_array=0x7f060000;
+        public static final int site_types_array=0x7f070000;
     }
     public static final class attr {
     }
     public static final class dimen {
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int cancle=0x7f020000;
-        public static final int edit=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int wp=0x7f020003;
+        public static final int bg_android=0x7f020000;
+        public static final int cancle=0x7f020001;
+        public static final int edit=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int logo=0x7f020004;
+        public static final int wp=0x7f020005;
     }
     public static final class id {
-        public static final int action_settings=0x7f09001f;
-        public static final int add_btn=0x7f09001d;
-        public static final int add_desc=0x7f09000b;
-        public static final int add_name=0x7f090007;
-        public static final int add_pw=0x7f09000a;
-        public static final int add_save_btn=0x7f090010;
-        public static final int add_type=0x7f09000c;
-        public static final int add_url=0x7f090008;
-        public static final int add_user=0x7f090009;
-        public static final int add_view=0x7f09000e;
-        public static final int add_view_all=0x7f090011;
-        public static final int back_main=0x7f090006;
-        public static final int btn_delete=0x7f09001c;
-        public static final int btn_update=0x7f09001b;
-        public static final int gen_pw=0x7f09000f;
-        public static final int list=0x7f09001e;
-        public static final int show_desc=0x7f090004;
-        public static final int show_name=0x7f090000;
-        public static final int show_pw=0x7f090003;
-        public static final int show_type=0x7f090005;
-        public static final int show_url=0x7f090001;
-        public static final int show_user=0x7f090002;
-        public static final int update_btn=0x7f090013;
-        public static final int update_view=0x7f090012;
-        public static final int update_view_all=0x7f090014;
-        public static final int user_desc_txt=0x7f090019;
-        public static final int user_mob_txt=0x7f090017;
-        public static final int user_name_id=0x7f090015;
-        public static final int user_name_txt=0x7f090016;
-        public static final int user_pw_txt=0x7f090018;
-        public static final int user_type_txt=0x7f09001a;
-        public static final int widget13=0x7f09000d;
+        public static final int LinearLayout01=0x7f0a001e;
+        public static final int OkButton=0x7f0a0023;
+        public static final int TextView02=0x7f0a0020;
+        public static final int action_settings=0x7f0a0026;
+        public static final int add_btn=0x7f0a0024;
+        public static final int add_desc=0x7f0a000c;
+        public static final int add_name=0x7f0a0008;
+        public static final int add_pw=0x7f0a000b;
+        public static final int add_save_btn=0x7f0a0011;
+        public static final int add_type=0x7f0a000d;
+        public static final int add_url=0x7f0a0009;
+        public static final int add_user=0x7f0a000a;
+        public static final int add_view=0x7f0a000f;
+        public static final int add_view_all=0x7f0a0012;
+        public static final int back_main=0x7f0a0007;
+        public static final int btn_delete=0x7f0a001d;
+        public static final int btn_update=0x7f0a001c;
+        public static final int button=0x7f0a0022;
+        public static final int editText=0x7f0a0021;
+        public static final int gen_pw=0x7f0a0010;
+        public static final int imageView=0x7f0a001f;
+        public static final int linearLayout=0x7f0a0000;
+        public static final int list=0x7f0a0025;
+        public static final int show_desc=0x7f0a0005;
+        public static final int show_name=0x7f0a0001;
+        public static final int show_pw=0x7f0a0004;
+        public static final int show_type=0x7f0a0006;
+        public static final int show_url=0x7f0a0002;
+        public static final int show_user=0x7f0a0003;
+        public static final int update_btn=0x7f0a0014;
+        public static final int update_view=0x7f0a0013;
+        public static final int update_view_all=0x7f0a0015;
+        public static final int user_desc_txt=0x7f0a001a;
+        public static final int user_mob_txt=0x7f0a0018;
+        public static final int user_name_id=0x7f0a0016;
+        public static final int user_name_txt=0x7f0a0017;
+        public static final int user_pw_txt=0x7f0a0019;
+        public static final int user_type_txt=0x7f0a001b;
+        public static final int widget13=0x7f0a000e;
     }
     public static final class layout {
-        public static final int activity_details=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int add_update_screen=0x7f030002;
-        public static final int listview_row=0x7f030003;
-        public static final int main=0x7f030004;
+        public static final int activity_details=0x7f040000;
+        public static final int activity_main=0x7f040001;
+        public static final int add_update_screen=0x7f040002;
+        public static final int listview_row=0x7f040003;
+        public static final int login_main=0x7f040004;
+        public static final int main=0x7f040005;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int main=0x7f090000;
+    }
+    public static final class mipmap {
+        public static final int ic_launcher=0x7f030000;
+        public static final int logo=0x7f030001;
     }
     public static final class string {
-        public static final int action_settings=0x7f070000;
-        public static final int app_name=0x7f070001;
-        public static final int title_activity_details=0x7f070002;
+        public static final int action_settings=0x7f080000;
+        public static final int app_name=0x7f080001;
+        public static final int pw_warning=0x7f080002;
+        public static final int title_activity_details=0x7f080003;
     }
     public static final class style {
         /**  API 11 theme customizations can go here. 
@@ -81,9 +96,9 @@ public final class R {
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f050000;
+        public static final int AppBaseTheme=0x7f060000;
         /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050001;
+        public static final int AppTheme=0x7f060001;
     }
 }
