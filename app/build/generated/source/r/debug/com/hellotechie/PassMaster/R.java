@@ -26,11 +26,11 @@ public final class R {
         public static final int wp=0x7f020005;
     }
     public static final class id {
-        public static final int LinearLayout01=0x7f0a001e;
-        public static final int OkButton=0x7f0a0023;
-        public static final int TextView02=0x7f0a0020;
-        public static final int action_settings=0x7f0a0026;
-        public static final int add_btn=0x7f0a0024;
+        public static final int LinearLayout01=0x7f0a0026;
+        public static final int OkButton=0x7f0a002b;
+        public static final int TextView02=0x7f0a0028;
+        public static final int action_settings=0x7f0a002e;
+        public static final int add_btn=0x7f0a002c;
         public static final int add_desc=0x7f0a000c;
         public static final int add_name=0x7f0a0008;
         public static final int add_pw=0x7f0a000b;
@@ -41,38 +41,47 @@ public final class R {
         public static final int add_view=0x7f0a000f;
         public static final int add_view_all=0x7f0a0012;
         public static final int back_main=0x7f0a0007;
-        public static final int btn_delete=0x7f0a001d;
-        public static final int btn_update=0x7f0a001c;
-        public static final int button=0x7f0a0022;
-        public static final int editText=0x7f0a0021;
+        public static final int btn_delete=0x7f0a0025;
+        public static final int btn_update=0x7f0a0024;
+        public static final int button=0x7f0a002a;
+        public static final int button2=0x7f0a0018;
+        public static final int button3=0x7f0a0016;
+        public static final int button4=0x7f0a001a;
+        public static final int button5=0x7f0a001d;
+        public static final int button6=0x7f0a001c;
+        public static final int editText=0x7f0a0029;
+        public static final int editText2=0x7f0a0019;
         public static final int gen_pw=0x7f0a0010;
-        public static final int imageView=0x7f0a001f;
+        public static final int imageView=0x7f0a0027;
         public static final int linearLayout=0x7f0a0000;
-        public static final int list=0x7f0a0025;
+        public static final int list=0x7f0a002d;
         public static final int show_desc=0x7f0a0005;
         public static final int show_name=0x7f0a0001;
         public static final int show_pw=0x7f0a0004;
         public static final int show_type=0x7f0a0006;
         public static final int show_url=0x7f0a0002;
         public static final int show_user=0x7f0a0003;
+        public static final int textView=0x7f0a0017;
+        public static final int textView2=0x7f0a001b;
         public static final int update_btn=0x7f0a0014;
         public static final int update_view=0x7f0a0013;
         public static final int update_view_all=0x7f0a0015;
-        public static final int user_desc_txt=0x7f0a001a;
-        public static final int user_mob_txt=0x7f0a0018;
-        public static final int user_name_id=0x7f0a0016;
-        public static final int user_name_txt=0x7f0a0017;
-        public static final int user_pw_txt=0x7f0a0019;
-        public static final int user_type_txt=0x7f0a001b;
+        public static final int user_desc_txt=0x7f0a0022;
+        public static final int user_mob_txt=0x7f0a0020;
+        public static final int user_name_id=0x7f0a001e;
+        public static final int user_name_txt=0x7f0a001f;
+        public static final int user_pw_txt=0x7f0a0021;
+        public static final int user_type_txt=0x7f0a0023;
         public static final int widget13=0x7f0a000e;
     }
     public static final class layout {
         public static final int activity_details=0x7f040000;
         public static final int activity_main=0x7f040001;
         public static final int add_update_screen=0x7f040002;
-        public static final int listview_row=0x7f040003;
-        public static final int login_main=0x7f040004;
-        public static final int main=0x7f040005;
+        public static final int config_pw=0x7f040003;
+        public static final int listview_row=0x7f040004;
+        public static final int login_main=0x7f040005;
+        public static final int main=0x7f040006;
     }
     public static final class menu {
         public static final int main=0x7f090000;
