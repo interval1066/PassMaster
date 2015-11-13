@@ -10,8 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-//import android.util.Log;
+import android.util.Log;
 import android.widget.Toast;
+import android.database.sqlite.*;
 
 public class Add_Update_User extends Activity {
     EditText add_name, add_url, add_user, add_pw, add_desc, add_type;
@@ -51,18 +52,24 @@ public class Add_Update_User extends Activity {
 	    add_save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHandler.Add_Site(new Site(add_name.getText().toString(),
-                    add_url.getText().toString(), add_user.getText().toString(),
-                    add_pw.getText().toString(), add_desc.getText().toString(),
-                    add_type.getText().toString()));
-                    Intent view_user = new Intent(Add_Update_User.this,
-                    Main_Screen.class);
 
-                view_user.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+                int ret= dbHandler.Add_Site(new Site(add_name.getText().toString(),
+                        add_url.getText().toString(), add_user.getText().toString(),
+                        add_pw.getText().toString(), add_desc.getText().toString(),
+                        add_type.getText().toString()));
+
+                Intent view_user = new Intent(Add_Update_User.this,
+                        Main_Screen.class);
+
+                view_user.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 startActivity(view_user);
                 finish();
+                Log.d("insert", String.valueOf(ret));
+                if(ret == -1) {
+                    Toast_msg = "You can't insert sites with the same name.";
+                    Show_Toast(Toast_msg);
+                }
             }
         });
 

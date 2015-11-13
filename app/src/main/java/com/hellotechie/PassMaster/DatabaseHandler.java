@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-//import android.util.Log;
+import android.database.sqlite.*;
+import android.util.Log;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
@@ -33,7 +32,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SITES);
 	    String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_SITES + "("
-		+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+		+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT NOT NULL UNIQUE,"
 		+ KEY_URL + " TEXT," + KEY_USER + " TEXT," + KEY_PW + " TEXT,"
             + KEY_DESC + " TEXT," + KEY_TYPE + " TEXT)";
 	    db.execSQL(CREATE_CONTACTS_TABLE);
@@ -48,17 +47,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		onCreate(db);
     }
 
-    public void Add_Site(Site site) {
-		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		values.put(KEY_NAME, site.getName());
-		values.put(KEY_URL, site.getUrl());
+    public int Add_Site(Site site) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, site.getName());
+        values.put(KEY_URL, site.getUrl());
         values.put(KEY_USER, site.getUser());
-		values.put(KEY_PW, site.getPw());
+        values.put(KEY_PW, site.getPw());
         values.put(KEY_DESC, site.getDesc());
-		values.put(KEY_TYPE, site.getType());
-		long res = db.insert(TABLE_SITES, null, values);
-		db.close();
+        values.put(KEY_TYPE, site.getType());
+        long res = db.insert(TABLE_SITES, null, values);
+        db.close();
+        return (int)res;
     }
 
     // Getting single contact
@@ -100,7 +100,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public ArrayList<Site> Get_Sites() {
 		try {
-		    site_list.clear();
+            site_list.clear();
 	    	String selectQuery = "SELECT  * FROM " + TABLE_SITES;
 
 	    	SQLiteDatabase db = this.getWritableDatabase();

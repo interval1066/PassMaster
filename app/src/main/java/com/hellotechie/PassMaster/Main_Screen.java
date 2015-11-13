@@ -19,6 +19,7 @@ import android.widget.Toast;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+
 class SiteHolder {
     TextView name;
     TextView url;
@@ -31,7 +32,7 @@ class SiteHolder {
 }
 
 public class Main_Screen extends Activity {
-    private Button add_btn;
+    private Button add_btn, settings;
     private ListView Site_listview;
     private ArrayList<Site> site_data = new ArrayList<Site>();
     private Site_Adapter cAdapter;
@@ -41,7 +42,7 @@ public class Main_Screen extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
         try {
@@ -49,16 +50,17 @@ public class Main_Screen extends Activity {
             Site_listview.setItemsCanFocus(false);
             add_btn = (Button) findViewById(R.id.add_btn);
 
+            settings = (Button) findViewById(R.id.button7);
             ArrayAdapter<Site> adapter = new ArrayAdapter<Site>(this,
                     android.R.layout.activity_list_item, site_data);
-            Site_listview.setAdapter(adapter);
 
+            Site_listview.setAdapter(adapter);
             Site_listview.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> Site_listview, View view, int position, long id) {
                     LinearLayout ll = (LinearLayout) view;
-                    TextView tv = (TextView) ll.findViewById(R.id.user_name_txt);
 
+                    TextView tv = (TextView) ll.findViewById(R.id.user_name_txt);
                     String item = tv.getText().toString();
                     Intent details = new Intent(Main_Screen.this,
                             DetailsActivity.class);
@@ -89,6 +91,26 @@ public class Main_Screen extends Activity {
 
                 startActivity(add_user);
                 finish();
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    DBExporter exporter = new DBExporter(getApplicationContext());
+                    exporter.exportSites();
+
+                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                    sendIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, exporter.exportSites());
+
+                    sendIntent.setType("text/plain");
+                    startActivity(Intent.createChooser(sendIntent, "Send Using"));
+                }
+                catch(Exception e){
+                    Show_Toast(e.toString());
+                }
             }
         });
     }

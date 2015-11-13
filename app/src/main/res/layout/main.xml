@@ -13,14 +13,22 @@
 
         <Button
             android:id="@+id/add_btn"
-            android:layout_width="match_parent"
+            android:layout_width="182dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:background="#000000"
             android:clickable="false"
             android:focusable="false"
             android:text="Add Site"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:layout_weight="0.77"/>
+
+        <Button
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:id="@+id/button7"
+            android:textColor="#ffffff"
+            android:background="#000000"/>
     </LinearLayout>
 
     <LinearLayout
