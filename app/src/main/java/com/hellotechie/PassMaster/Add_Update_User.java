@@ -80,20 +80,14 @@ public class Add_Update_User extends Activity {
                 add_url.getText().toString(), add_user.getText().toString(), add_pw.getText().toString(),
 				add_desc.getText().toString(), add_type.getText().toString()));
 			    dbHandler.close();
-                if(n > -1) {
-                    Toast_msg = add_pw.getText().toString();
-		            Show_Toast(Toast_msg);
-                    Intent view_user = new Intent(Add_Update_User.this,
-                            Main_Screen.class);
-                    view_user.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                            | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(view_user);
-                    finish();
-                }
-                else {
-                    Toast_msg = "Sorry Some Fields are missing.\nPlease Fill up all.";
-                    Show_Toast(Toast_msg);
-                }
+                Toast_msg = add_pw.getText().toString();
+                Show_Toast(Toast_msg);
+                Intent view_user = new Intent(Add_Update_User.this,
+                        Main_Screen.class);
+                view_user.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(view_user);
+                finish();
             }
         });
 

@@ -14,7 +14,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.widget.EditText;
 
 /** Class Must extends with Dialog */

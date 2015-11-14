@@ -18,14 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.util.Log;
 
 
 class SiteHolder {
     TextView name;
-    TextView url;
-    TextView user;
-    TextView pw;
-    TextView desc;
     TextView type;
     Button edit;
     Button delete;
@@ -94,21 +91,21 @@ public class Main_Screen extends Activity {
             }
         });
 
-        settings.setOnClickListener(new View.OnClickListener() {
+        settings.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     DBExporter exporter = new DBExporter(getApplicationContext());
+
                     exporter.exportSites();
-
                     Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                    sendIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, exporter.exportSites());
+                    //sendIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, exporter.exportSites());
                     sendIntent.setType("text/plain");
                     startActivity(Intent.createChooser(sendIntent, "Send Using"));
                 }
-                catch(Exception e){
+                catch(Exception e) {
                     Show_Toast(e.toString());
                 }
             }
@@ -158,7 +155,7 @@ public class Main_Screen extends Activity {
     public void onResume() {
 	// TODO Auto-generated method stub
 		super.onResume();
-		Set_Referash_Data();
+		//Set_Referash_Data();
     }
 
     public class Site_Adapter extends ArrayAdapter<Site> {
