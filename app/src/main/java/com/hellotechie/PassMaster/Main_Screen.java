@@ -1,8 +1,10 @@
 package com.hellotechie.PassMaster;
 
 import java.util.ArrayList;
+import java.io.File;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.net.Uri;
 import android.util.Log;
 
 
@@ -29,18 +32,20 @@ class SiteHolder {
 }
 
 public class Main_Screen extends Activity {
-    private Button add_btn, settings;
+    private Button add_btn, settings, importer;
     private ListView Site_listview;
     private ArrayList<Site> site_data = new ArrayList<Site>();
     private Site_Adapter cAdapter;
     private DatabaseHandler db;
     private String Toast_msg;
     private LoginDlg login;
+    private Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        this.context = getApplicationContext();
 
         try {
             Site_listview = (ListView) findViewById(R.id.list);
@@ -51,21 +56,23 @@ public class Main_Screen extends Activity {
             ArrayAdapter<Site> adapter = new ArrayAdapter<Site>(this,
                     android.R.layout.activity_list_item, site_data);
 
+            importer = (Button) findViewById(R.id.button8);
             Site_listview.setAdapter(adapter);
             Site_listview.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> Site_listview, View view, int position, long id) {
-                    LinearLayout ll = (LinearLayout) view;
 
+                    LinearLayout ll = (LinearLayout) view;
                     TextView tv = (TextView) ll.findViewById(R.id.user_name_txt);
                     String item = tv.getText().toString();
+
                     Intent details = new Intent(Main_Screen.this,
                             DetailsActivity.class);
 
                     details.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                             Intent.FLAG_ACTIVITY_NEW_TASK);
-                    details.putExtra("Site", item);
 
+                    details.putExtra("Site", item);
                     startActivityForResult(details, 0);
                     finish();
                 }
@@ -99,17 +106,38 @@ public class Main_Screen extends Activity {
 
                     exporter.exportSites();
                     Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                    //sendIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-
                     sendIntent.putExtra(Intent.EXTRA_TEXT, exporter.exportSites());
+
                     sendIntent.setType("text/plain");
                     startActivity(Intent.createChooser(sendIntent, "Send Using"));
                 }
-                catch(Exception e) {
+                catch (Exception e) {
                     Show_Toast(e.toString());
                 }
             }
         });
+
+        importer.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent get_file = new Intent(Main_Screen.this,
+                        ListFileActivity.class);
+                startActivity(get_file);
+            }
+
+        });
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0
+                && resultCode == Activity.RESULT_OK && data != null) {
+            Uri uri = data.getData();
+            if (uri != null) {
+                Log.d("onActivityForResult", uri.toString());
+            }
+        }
     }
 
     public void Set_Referash_Data() {

@@ -32,6 +32,10 @@
             android:configChanges="orientation"
             android:label="@string/app_name" />
         <activity
+            android:name=".ListFileActivity"
+            android:configChanges="orientation"
+            android:label="@string/app_name" />
+        <activity
             android:name=".Main_Screen"
             android:configChanges="orientation"
             android:label="@string/app_name" />

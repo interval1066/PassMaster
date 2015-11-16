@@ -29,7 +29,7 @@ public final class R {
         public static final int LinearLayout01=0x7f0a0026;
         public static final int OkButton=0x7f0a002b;
         public static final int TextView02=0x7f0a0028;
-        public static final int action_settings=0x7f0a002f;
+        public static final int action_settings=0x7f0a0030;
         public static final int add_btn=0x7f0a002c;
         public static final int add_desc=0x7f0a000c;
         public static final int add_name=0x7f0a0008;
@@ -50,12 +50,13 @@ public final class R {
         public static final int button5=0x7f0a001d;
         public static final int button6=0x7f0a001c;
         public static final int button7=0x7f0a002d;
+        public static final int button8=0x7f0a002e;
         public static final int editText=0x7f0a0029;
         public static final int editText2=0x7f0a0019;
         public static final int gen_pw=0x7f0a0010;
         public static final int imageView=0x7f0a0027;
         public static final int linearLayout=0x7f0a0000;
-        public static final int list=0x7f0a002e;
+        public static final int list=0x7f0a002f;
         public static final int show_desc=0x7f0a0005;
         public static final int show_name=0x7f0a0001;
         public static final int show_pw=0x7f0a0004;
@@ -77,13 +78,14 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_details=0x7f040000;
-        public static final int activity_main=0x7f040001;
-        public static final int add_update_screen=0x7f040002;
-        public static final int app_bar=0x7f040003;
-        public static final int config_pw=0x7f040004;
-        public static final int listview_row=0x7f040005;
-        public static final int login_main=0x7f040006;
-        public static final int main=0x7f040007;
+        public static final int activity_list_files=0x7f040001;
+        public static final int activity_main=0x7f040002;
+        public static final int add_update_screen=0x7f040003;
+        public static final int app_bar=0x7f040004;
+        public static final int config_pw=0x7f040005;
+        public static final int listview_row=0x7f040006;
+        public static final int login_main=0x7f040007;
+        public static final int main=0x7f040008;
     }
     public static final class menu {
         public static final int main=0x7f090000;
