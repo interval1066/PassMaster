@@ -75,4 +75,8 @@ public class DBExporter {
         }
         return null;
     }
+
+    public void importSites(String path) {
+        Log.d("importing sites: ", path);
+    }
 }

@@ -110,6 +110,7 @@ public class Main_Screen extends Activity {
 
                     sendIntent.setType("text/plain");
                     startActivity(Intent.createChooser(sendIntent, "Send Using"));
+                    finish();
                 }
                 catch (Exception e) {
                     Show_Toast(e.toString());
@@ -122,6 +123,7 @@ public class Main_Screen extends Activity {
             public void onClick(View v) {
                 Intent get_file = new Intent(Main_Screen.this,
                         ListFileActivity.class);
+
                 startActivity(get_file);
             }
 

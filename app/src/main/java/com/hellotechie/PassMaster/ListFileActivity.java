@@ -15,17 +15,19 @@ import java.io.File;
 public class ListFileActivity extends ListActivity {
 
     private String path;
+    public String selectedPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_files);
 
+        selectedPath = "";
         // Use the current directory as title
         path = "/";
-        if (getIntent().hasExtra("path")) {
+        if (getIntent().hasExtra("path"))
             path = getIntent().getStringExtra("path");
-        }
+
         setTitle(path);
 
         // Read all files sorted into the values-array
@@ -53,17 +55,23 @@ public class ListFileActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         String filename = (String) getListAdapter().getItem(position);
-        if (path.endsWith(File.separator)) {
+        if (path.endsWith(File.separator))
+
             filename = path + filename;
-        } else {
+        else
             filename = path + File.separator + filename;
-        }
+
         if (new File(filename).isDirectory()) {
             Intent intent = new Intent(this, ListFileActivity.class);
             intent.putExtra("path", filename);
+
             startActivity(intent);
-        } else {
-            Toast.makeText(this, filename + " is not a directory", Toast.LENGTH_LONG).show();
+        }
+        else {
+            //Toast.makeText(this, filename + " is not a directory", Toast.LENGTH_LONG).show();
+            selectedPath = filename;
+            DBExporter exporter = new DBExporter(this);
+            exporter.importSites(selectedPath);
         }
     }
 }
