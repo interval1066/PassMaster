@@ -7,12 +7,20 @@ package com.hellotechie.PassMaster;
 import android.content.Context;
 import android.preference.PreferenceManager;
 import android.util.Xml;
+
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.io.IOException;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 public class DBExporter {
     private ArrayList<Site> site_data = new ArrayList<Site>();
@@ -21,6 +29,9 @@ public class DBExporter {
     protected XmlSerializer serializer;
     private StringWriter writer;
     private SharedPreferences sharedPreferences;
+    private String path;
+    private XmlPullParserFactory xmlFactoryObject;
+    private XmlPullParser myparser;
 
     public DBExporter(Context context) {
         this.context = context;
@@ -77,6 +88,46 @@ public class DBExporter {
     }
 
     public void importSites(String path) {
-        Log.d("importing sites: ", path);
+        this.path = path;
+        String content = "";
+
+        try {
+            if (db.Get_Total_Sites() > 0) {
+                xmlFactoryObject = XmlPullParserFactory.newInstance();
+                myparser = xmlFactoryObject.newPullParser();
+                myparser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+
+                InputStream is = new ByteArrayInputStream(this
+                        .path.getBytes(Charset.defaultCharset()));
+                myparser.setInput(is, null);
+
+                int event = myparser.getEventType();
+                while (event != XmlPullParser.END_DOCUMENT) {
+                    String name = myparser.getName();
+                    switch (event) {
+                        case XmlPullParser.START_TAG:
+                            break;
+
+                        case XmlPullParser.END_TAG:
+                            if (name.equals("name")) {
+                                content = myparser.getAttributeValue(null, "name");
+                            }
+                            break;
+                    }
+                    event = myparser.next();
+                }
+                Log.d("found name: ", content);
+            }
+            else
+                Show_Toast("The site list is empty.");
+        }
+        catch (Exception e) {
+            Log.d("Error", e.toString());
+        }
     }
+
+    public void Show_Toast(String msg) {
+        Toast.makeText(this.context, msg, Toast.LENGTH_LONG).show();
+    }
+
 }

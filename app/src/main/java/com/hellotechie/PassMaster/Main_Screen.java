@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -123,10 +124,10 @@ public class Main_Screen extends Activity {
             public void onClick(View v) {
                 Intent get_file = new Intent(Main_Screen.this,
                         ListFileActivity.class);
-
+                File exterlStorage = Environment.getExternalStorageDirectory();
+                get_file.putExtra("path", exterlStorage.toString());
                 startActivity(get_file);
             }
-
         });
     };
 
