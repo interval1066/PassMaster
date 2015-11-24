@@ -3,10 +3,11 @@ package com.hellotechie.PassMaster;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
-import android.widget.Toast;
+import android.util.Log;
 import android.app.ListActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,6 +56,7 @@ public class ListFileActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         String filename = (String) getListAdapter().getItem(position);
+        selectedPath = "";
         if (path.endsWith(File.separator))
 
             filename = path + filename;
@@ -71,7 +73,19 @@ public class ListFileActivity extends ListActivity {
             //Toast.makeText(this, filename + " is not a directory", Toast.LENGTH_LONG).show();
             selectedPath = filename;
             DBExporter exporter = new DBExporter(this);
-            exporter.importSites(selectedPath);
+            try {
+                exporter.importSites(selectedPath);
+            }
+            catch(PassMasterException e){
+                Show_Toast("There was a problem importing the site list");
+            }
+            Intent main = new Intent(ListFileActivity.this,
+                    Main_Screen.class);
+            startActivity(main);
         }
+    }
+
+    public void Show_Toast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 }

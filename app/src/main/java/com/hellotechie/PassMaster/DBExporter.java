@@ -7,17 +7,24 @@ package com.hellotechie.PassMaster;
 import android.content.Context;
 import android.preference.PreferenceManager;
 import android.util.Xml;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
-import java.io.StringWriter;
+import java.io.*;
 import java.util.ArrayList;
-import java.io.IOException;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.nio.charset.Charset;
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
@@ -30,6 +37,7 @@ public class DBExporter {
     private StringWriter writer;
     private SharedPreferences sharedPreferences;
     private String path;
+    private Site site;
     private XmlPullParserFactory xmlFactoryObject;
     private XmlPullParser myparser;
 
@@ -47,7 +55,6 @@ public class DBExporter {
     public String exportSites() {
         site_data = db.Get_Sites();
         if (site_data.size() > 0) {
-
             try {
                 serializer.setOutput(writer);
                 serializer.startDocument("UTF-8", true);
@@ -62,7 +69,7 @@ public class DBExporter {
                 for (final Site site : site_data) {
 
                     serializer.startTag("", "Site");
-                    serializer.attribute("", "name", site.getType());
+                    serializer.attribute("", "name", site.getName());
                     serializer.attribute("", "url", site.getUrl());
 
                     serializer.attribute("", "user", site.getUser());
@@ -87,47 +94,72 @@ public class DBExporter {
         return null;
     }
 
-    public void importSites(String path) {
+    public void importSites(String path) throws PassMasterException {
         this.path = path;
         String content = "";
 
         try {
-            if (db.Get_Total_Sites() > 0) {
-                xmlFactoryObject = XmlPullParserFactory.newInstance();
-                myparser = xmlFactoryObject.newPullParser();
-                myparser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            if (db.Get_Total_Sites() < 1)
+                db.clearDB();
+            InputStream is = new ByteArrayInputStream(this
+                    .path.getBytes(Charset.defaultCharset()));
 
-                InputStream is = new ByteArrayInputStream(this
-                        .path.getBytes(Charset.defaultCharset()));
-                myparser.setInput(is, null);
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setIgnoringComments(true);
+            DocumentBuilder parser = factory.newDocumentBuilder();
 
-                int event = myparser.getEventType();
-                while (event != XmlPullParser.END_DOCUMENT) {
-                    String name = myparser.getName();
-                    switch (event) {
-                        case XmlPullParser.START_TAG:
-                            break;
+            Document document = parser.parse(new InputSource(readStreamAsString(is)));
+            NodeList conf = document.getElementsByTagName("globals");
+            NamedNodeMap globals = conf.item(0).getAttributes();
 
-                        case XmlPullParser.END_TAG:
-                            if (name.equals("name")) {
-                                content = myparser.getAttributeValue(null, "name");
-                            }
-                            break;
-                    }
-                    event = myparser.next();
-                }
-                Log.d("found name: ", content);
+            Node masterpw = globals.getNamedItem("masterpw");
+            Editor editor = sharedPreferences.edit();
+            editor.putString("masterpw", masterpw.getNodeValue());
+
+            editor.apply();
+            NodeList sections = document.getElementsByTagName("Site");
+            for (int i = 0; i < sections.getLength(); i++) {
+
+                NamedNodeMap attributes = sections.item(i).getAttributes();
+                Node name = attributes.getNamedItem("name");
+                Node url = attributes.getNamedItem("url");
+
+                Node user = attributes.getNamedItem("user");
+                Node pw = attributes.getNamedItem("pw");
+                Node desc = attributes.getNamedItem("desc");
+
+                Node type = attributes.getNamedItem("type");
+                Site site = new Site(name.getNodeValue(), url.getNodeValue(),
+                        user.getNodeValue(), pw.getNodeValue(),
+                        desc.getNodeValue(), type.getNodeValue());
+
+                db.Add_Site(site);
             }
-            else
-                Show_Toast("The site list is empty.");
         }
         catch (Exception e) {
-            Log.d("Error", e.toString());
+            Log.d("error", e.getMessage());
+            throw new PassMasterException("There was a problem importing the sites list");
         }
     }
 
-    public void Show_Toast(String msg) {
+    private void Show_Toast(String msg) {
         Toast.makeText(this.context, msg, Toast.LENGTH_LONG).show();
     }
 
+    private static String readStreamAsString(InputStream in)
+            throws IOException {
+
+        BufferedInputStream bis = new BufferedInputStream(in);
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        int result = bis.read();
+
+        while(result != -1) {
+            byte b = (byte)result;
+            buf.write(b);
+
+            result = bis.read();
+        }
+        String ret = "file://";
+        return ret += buf.toString();
+    }
 }

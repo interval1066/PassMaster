@@ -105,13 +105,16 @@ public class Main_Screen extends Activity {
                 try {
                     DBExporter exporter = new DBExporter(getApplicationContext());
 
-                    exporter.exportSites();
-                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, exporter.exportSites());
+                    if(exporter.exportSites() != null) {
+                        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, exporter.exportSites());
 
-                    sendIntent.setType("text/plain");
-                    startActivity(Intent.createChooser(sendIntent, "Send Using"));
-                    finish();
+                        sendIntent.setType("text/plain");
+                        startActivity(Intent.createChooser(sendIntent, "Send Using"));
+                        finish();
+                    }
+                    else
+                        Show_Toast("The site list is empty");
                 }
                 catch (Exception e) {
                     Show_Toast(e.toString());
@@ -186,7 +189,7 @@ public class Main_Screen extends Activity {
     public void onResume() {
 	// TODO Auto-generated method stub
 		super.onResume();
-		//Set_Referash_Data();
+		Set_Referash_Data();
     }
 
     public class Site_Adapter extends ArrayAdapter<Site> {

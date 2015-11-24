@@ -38,6 +38,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	    db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
+    public void clearDB() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_SITES);
+    }
+
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
