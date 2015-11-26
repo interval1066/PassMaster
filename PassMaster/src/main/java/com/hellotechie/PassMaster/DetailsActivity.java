@@ -1,6 +1,7 @@
 package com.hellotechie.PassMaster;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,13 +10,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DetailsActivity extends Activity {
     private Button backBtn;
     private DatabaseHandler db;
-    private TextView name, url, usr, pw, desc, type;
+    private TextView name, url, usr, desc, type;
+    public TextView pw;
     private SharedPreferences sharedPreferences;
-    private AES aes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +46,12 @@ public class DetailsActivity extends Activity {
     }
     private void getSiteDetails(String nm) {
         try {
+            AsyncTaskRunner runner = new AsyncTaskRunner();
             db = new DatabaseHandler(this);
-            AES aes = new AES();
+
             String pass = sharedPreferences.getString("masterpw", "");
             Site site = db.Get_Site_By_Name(nm);
+            runner.execute(site.getPw(), pass);
 
             name = (TextView) findViewById(R.id.show_name);
             name.setText(site.getName());
@@ -58,7 +62,7 @@ public class DetailsActivity extends Activity {
             usr.setText(site.getUser());
 
             pw = (TextView) findViewById(R.id.show_pw);
-            pw.setText(aes.decrypt(site.getPw(), pass));
+            //pw.setText()
             desc = (TextView) findViewById(R.id.show_desc);
 
             desc.setText(site.getDesc());
@@ -68,5 +72,39 @@ public class DetailsActivity extends Activity {
         catch (Exception e) {
             Log.d("Error: ", e.toString());
         }
+    }
+
+    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
+        private String resp;
+        private AES aes;
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                AES aes = new AES();
+                if(params[0].length() > 0)
+                    resp = aes.decrypt(params[0], params[1]);
+                else
+                    resp = "";
+            }
+            catch (Exception e) {
+            }
+            return resp;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            pw.setText(result);
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            Show_Toast("Please wait while the password is being decoded");
+        }
+    }
+
+    public void Show_Toast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 }
