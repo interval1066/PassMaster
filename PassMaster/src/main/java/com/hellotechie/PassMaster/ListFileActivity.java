@@ -1,17 +1,17 @@
 package com.hellotechie.PassMaster;
 
-import android.os.Bundle;
-import android.content.Intent;
-import android.view.View;
-import android.util.Log;
 import android.app.ListActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import java.util.List;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.io.File;
+import java.util.List;
 
 public class ListFileActivity extends ListActivity {
 

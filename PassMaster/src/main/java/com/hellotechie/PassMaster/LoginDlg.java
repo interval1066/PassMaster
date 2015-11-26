@@ -3,17 +3,18 @@ package com.hellotechie.PassMaster;
 /**
  * Created by bwana on 11/11/15.
  */
-import android.os.Bundle;
-import android.content.Context;
-import android.view.View;
-import android.content.Intent;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.app.AlertDialog;
 import android.widget.EditText;
 
 /** Class Must extends with Dialog */

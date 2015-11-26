@@ -2,12 +2,12 @@ package com.hellotechie.PassMaster;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.view.View.OnClickListener;
-import android.view.View;
-import android.view.Window;
-import android.preference.PreferenceManager;
-import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.preference.PreferenceManager;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
