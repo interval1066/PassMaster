@@ -2,7 +2,9 @@ package com.hellotechie.PassMaster;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,15 +24,23 @@ public class Add_Update_User extends Activity {
     String Toast_msg = null;
     int USER_ID;
     DatabaseHandler dbHandler = new DatabaseHandler(this);
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.add_update_screen);
+
 	    Set_Add_Update_Screen();
         List<String> types = Arrays.asList(getResources().getStringArray(R.array.site_types_array));
 	    String called_from = getIntent().getStringExtra("called");
 
+        sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        AES aes = new AES();
+        String pw = sharedPreferences.getString("masterpw", "");
+
+        try {
 	    if (called_from.equalsIgnoreCase("add")) {
 	        add_view.setVisibility(View.VISIBLE);
 	        update_view.setVisibility(View.GONE);
@@ -44,37 +54,48 @@ public class Add_Update_User extends Activity {
             add_name.setText(s.getName());
 	        add_url.setText(s.getUrl());
             add_user.setText(s.getUser());
-	        add_pw.setText(s.getPw());
+	        add_pw.setText(aes.decrypt(s.getPw(), pw));
 		    add_desc.setText(s.getDesc());
             add_type.setSelection(types.indexOf(s.getType()));
 	        // dbHandler.close();
+        }
+
 	    }
+        catch (Exception e) {
+            // Handle?
+        }
 
 	    add_save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (add_name.getText().length() > 0) {
-                    int ret = dbHandler.Add_Site(new Site(add_name.getText().toString(),
-                            add_url.getText().toString(), add_user.getText().toString(),
-                            add_pw.getText().toString(), add_desc.getText().toString(),
-                            String.valueOf(add_type.getSelectedItem())));
+                try {
+                    if (add_name.getText().length() > 0) {
+                        AES aes = new AES();
+                        String pw = sharedPreferences.getString("masterpw", "");
+                        int ret = dbHandler.Add_Site(new Site(add_name.getText().toString(),
+                                add_url.getText().toString(), add_user.getText().toString(),
+                                aes.encrypt(add_pw.getText().toString(), pw), add_desc.getText().toString(),
+                                String.valueOf(add_type.getSelectedItem())));
 
-                    Intent view_user = new Intent(Add_Update_User.this,
-                            Main_Screen.class);
+                        Intent view_user = new Intent(Add_Update_User.this,
+                                Main_Screen.class);
 
-                    view_user.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        view_user.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                    startActivity(view_user);
-                    finish();
-                    Log.d("insert", String.valueOf(ret));
-                    if (ret == -1) {
-                        Toast_msg = "You can't insert sites with the same name.";
+                        startActivity(view_user);
+                        finish();
+                        Log.d("insert", String.valueOf(ret));
+                        if (ret == -1) {
+                            Toast_msg = "You can't insert sites with the same name.";
+                            Show_Toast(Toast_msg);
+                        }
+                    } else {
+                        Toast_msg = "A site must at least include a name";
                         Show_Toast(Toast_msg);
                     }
                 }
-                else {
-                    Toast_msg = "A site must at least include a name";
-                    Show_Toast(Toast_msg);
+                catch (Exception e) {
+                    // Handle an exception that will probably never get thrown?
                 }
             }
         });
@@ -82,18 +103,27 @@ public class Add_Update_User extends Activity {
         update_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int n = dbHandler.Update_Site(new Site(USER_ID, add_name.getText().toString(),
-                        add_url.getText().toString(), add_user.getText().toString(), add_pw.getText().toString(),
-                        add_desc.getText().toString(), String.valueOf(add_type.getSelectedItem())));
-			    dbHandler.close();
-                Toast_msg = add_pw.getText().toString();
-                Show_Toast(Toast_msg);
-                Intent view_user = new Intent(Add_Update_User.this,
-                        Main_Screen.class);
-                view_user.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(view_user);
-                finish();
+                try {
+                    String pw = sharedPreferences.getString("masterpw", "");
+                    AES aes = new AES();
+                    int n = dbHandler.Update_Site(new Site(USER_ID, add_name.getText().toString(),
+                            add_url.getText().toString(), add_user.getText().toString(),
+                            aes.encrypt(add_pw.getText().toString(), pw),
+                            add_desc.getText().toString(),
+                            String.valueOf(add_type.getSelectedItem())));
+                    dbHandler.close();
+                    Toast_msg = add_pw.getText().toString();
+                    Show_Toast(Toast_msg);
+                    Intent view_user = new Intent(Add_Update_User.this,
+                            Main_Screen.class);
+                    view_user.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(view_user);
+                    finish();
+                }
+                catch (Exception e) {
+                    // Again, handle this?
+                }
             }
         });
 

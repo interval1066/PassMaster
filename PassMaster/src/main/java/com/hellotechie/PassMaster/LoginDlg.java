@@ -20,7 +20,7 @@ import android.widget.EditText;
 /** Class Must extends with Dialog */
 /** Implement onClickListener to dismiss dialog when OK Button is pressed */
 public class LoginDlg extends Activity {
-    Button okButton;
+    private Button okButton;
     private SharedPreferences sharedPreferences;
     private EditText password;
     Context context;
